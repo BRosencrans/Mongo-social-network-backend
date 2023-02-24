@@ -14,7 +14,7 @@ const userSchema = new Schema({
         //regex used to check for a valid email address 
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Your email was entered incorrectly, please try again",]
     },
-    Echo: [
+    echo: [
         {
             type: Schema.Types.ObjectId,
             ref: "Echo"
