@@ -4,15 +4,11 @@ const echoController = {
   //Finds all Echos(posts)
   getAllEchos(req, res) {
     Echo.find({})
+      .populate({
+        path: "echoEcho",
+        select: "-__v",
+      })
       .select("-__v")
-      .populate({
-        path: " echoEcho",
-        select: "-__v",
-      })
-      .populate({
-        path: "echos",
-        select: "-__v",
-      })
       .then((allEchos) => res.json(allEchos))
       .catch((err) => {
         console.log(err);
@@ -41,7 +37,7 @@ const echoController = {
       .then((newEcho) => {
         return User.findOneAndUpdate(
           {_id: body.userId },
-          {$push: {thoughts: newEcho._id}},
+          {$push: {echos: newEcho._id}},
           {new: true}
         );
       })
