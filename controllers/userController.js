@@ -60,15 +60,15 @@ const userController = {
   },
  //Deletes a user and associated echos(posts)
   deleteUser({params}, res) {
-    User.findOneAndDelete({ _id: params.userId })
+    User.findOneAndDelete({ _id: params.id})
       .then((deleteUser) => {
         if (!deleteUser) {
           return res.status(404).json({message: "No user with this ID exists"});
         }
-        return Echo.deleteMany({ _id: {$in: deleteUser.echos}});
+        return Echo.deleteMany({_id: {$in: deleteUser.echos}});
       })
       .then(() => {
-        res.json({ message: "User and Echos have been deleted, have a wonderful day!"});
+        res.json({message: "User and Echos have been deleted, have a wonderful day!"});
       })
       .catch((err) => {
         console.log(err);
